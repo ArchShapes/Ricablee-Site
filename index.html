@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ricablee - Twitch</title>
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -818,11 +817,9 @@
 </head>
 <body>
 
-    <!-- Custom Cursor Ring & Glow -->
     <div id="custom-cursor"></div>
     <div id="cursor-glow"></div>
 
-    <!-- Background Canvas and Effects -->
     <div id="bg-canvas-container">
         <canvas id="wave-canvas"></canvas>
         <canvas id="particle-canvas"></canvas>
@@ -831,16 +828,12 @@
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
 
-    <!-- Toast Container -->
     <div id="toast-container"></div>
 
-    <!-- MAIN CONTENT -->
     <div class="container">
 
-        <!-- 1. HERO SECTION -->
         <section class="hero">
             <div class="hero-content">
-                <!-- LIVE STATUS PILL -->
                 <div class="live-status-bar">
                     <div class="live-status-pill interactive-hover" id="top-live-pill">
                         <span class="status-dot" id="pill-status-dot"></span>
@@ -861,7 +854,6 @@
             </div>
         </section>
 
-        <!-- 2. ABOUT SECTION -->
         <section id="about">
             <h2 class="section-title interactive-hover">About</h2>
             <div class="glass-card about-card interactive-hover" id="about-card">
@@ -871,13 +863,11 @@
             </div>
         </section>
 
-        <!-- 3. GAME LEADERBOARD SECTION -->
         <section id="leaderboard">
             <h2 class="section-title interactive-hover">Game Leaderboard</h2>
             <p class="section-subtitle">These are the games you'll see most often on stream.</p>
             
             <div class="leaderboard-grid">
-                <!-- Rank 1 (Featured) -->
                 <div class="glass-card game-card featured interactive-hover" data-tilt data-game="Geometry Dash">
                     <div class="game-rank">#1</div>
                     <div class="game-info">
@@ -886,7 +876,6 @@
                     </div>
                 </div>
 
-                <!-- Rank 2 -->
                 <div class="glass-card game-card interactive-hover" data-tilt data-game="Minecraft">
                     <div class="game-rank">#2</div>
                     <div class="game-info">
@@ -895,7 +884,6 @@
                     </div>
                 </div>
 
-                <!-- Rank 3 -->
                 <div class="glass-card game-card interactive-hover" data-tilt data-game="Meccha Chameleon">
                     <div class="game-rank">#3</div>
                     <div class="game-info">
@@ -904,7 +892,6 @@
                     </div>
                 </div>
 
-                <!-- Rank 4 -->
                 <div class="glass-card game-card interactive-hover" data-tilt data-game="Rocket League">
                     <div class="game-rank">#4</div>
                     <div class="game-info">
@@ -913,7 +900,6 @@
                     </div>
                 </div>
 
-                <!-- Rank 5 -->
                 <div class="glass-card game-card interactive-hover" data-tilt data-game="Everything Else">
                     <div class="game-rank">#5</div>
                     <div class="game-info">
@@ -924,19 +910,15 @@
             </div>
         </section>
 
-        <!-- 4. LIVE STREAM SECTION -->
         <section id="live">
             <h2 class="section-title interactive-hover" id="live-section-heading">Ricablee Stream Preview</h2>
             <p class="section-subtitle">Peek in — or jump straight into chat.</p>
 
             <div class="stream-grid">
-                <!-- Stream Player Card -->
                 <div class="glass-card player-card interactive-hover" id="fake-player">
                     <div class="player-screen">
-                        <!-- Dynamic Stream Video -->
                         <video class="player-video" autoplay loop muted playsinline id="stream-video">
-                            <!-- JS dynamically loads src -->
-                        </video>
+                            </video>
                         <div class="player-badges">
                             <span class="badge-viewers"><span id="viewer-count">17</span> viewers</span>
                         </div>
@@ -945,21 +927,18 @@
                         </div>
                     </div>
                     <div class="player-details">
-                        <!-- Dynamic Stream Title -->
                         <h3 id="stream-title">Geometry Dash</h3>
                         <p>Click to watch on Twitch</p>
                     </div>
                 </div>
 
-                <!-- Stream Chat Panel -->
                 <div class="glass-card chat-card interactive-hover" id="chat-panel">
                     <div class="chat-header">
                         <span>Stream Chat</span>
                         <div class="chat-indicator"></div>
                     </div>
                     <div class="chat-messages" id="chat-messages">
-                        <!-- Dynamic Messages -->
-                    </div>
+                        </div>
                     <div class="chat-footer">
                         <div class="chat-cta" id="chat-cta">
                             <span>Click to join chat →</span>
@@ -972,14 +951,12 @@
             </div>
         </section>
 
-        <!-- FOOTER -->
         <footer class="interactive-hover" id="page-footer">
             <p>© 2026 Ricablee & ArchShapes. All rights reserved.</p>
         </footer>
 
     </div>
 
-    <!-- COMPACT ICON THEME DROPDOWN -->
     <div class="custom-dropdown-container">
         <div class="custom-dropdown" id="custom-theme-dropdown">
             <div class="custom-dropdown-trigger interactive-hover" title="Change Theme">
@@ -998,7 +975,6 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         /* --------------------------------------------------------------------------
          * 1. THEME ENGINE WITH LOCALSTORAGE SAVE & RESTORE
@@ -1084,9 +1060,6 @@
         /* --------------------------------------------------------------------------
          * 3. DYNAMIC VIDEO & TITLE LOAD LOGIC (Includes 20% chance for pvideo-3.mp4)
          * -------------------------------------------------------------------------- */
-        const streamVideo = document.getElementById('stream-video');
-        const streamTitle = document.getElementById('stream-title');
-
         const streamVideo = document.getElementById('stream-video');
         const streamTitle = document.getElementById('stream-title');
 
