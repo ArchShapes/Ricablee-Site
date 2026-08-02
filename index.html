@@ -1087,6 +1087,9 @@
         const streamVideo = document.getElementById('stream-video');
         const streamTitle = document.getElementById('stream-title');
 
+        const streamVideo = document.getElementById('stream-video');
+        const streamTitle = document.getElementById('stream-title');
+
         const randVideoRoll = Math.random();
 
         if (randVideoRoll < 0.20) {
@@ -1095,12 +1098,9 @@
         } else if (randVideoRoll < 0.60) {
             streamVideo.src = 'pvideo-1.mp4';
             streamTitle.textContent = 'Geometry Dash - Star Hunt';
-        } else if {
+        } else {
             streamVideo.src = 'pvideo-2.mp4';
             streamTitle.textContent = 'Level Requests - Join now!';
-        } else {
-            streamVideo.src = 'pvideo-1.mp4';
-            streamTitle.textContent = 'Level Requests but I play the worst ones...';
         }
 
         /* --------------------------------------------------------------------------
