@@ -1,636 +1,116 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="polish">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | Ricablee</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="favicon.png">
-    
+    <title>404 // ricablee.pages.dev</title>
     <style>
-        /* ==========================================================================
-           1. THEME VARIABLES & RESET
-           ========================================================================== */
-        :root[data-theme="polish"] {
-            --bg-base: #0e0e10;
-            --bg-surface: rgba(24, 24, 27, 0.7);
-            --bg-surface-hover: rgba(38, 38, 44, 0.85);
-            --border-color: rgba(145, 71, 255, 0.25);
-            --border-glow: rgba(145, 71, 255, 0.6);
-            --text-primary: #efeff1;
-            --text-secondary: #adadb8;
-            --accent: #9146ff;
-            --accent-glow: rgba(145, 71, 255, 0.2);
-            --accent-alt: #00f5d4;
-            --particle-color: rgba(145, 71, 255, 0.5);
-            --wave-color: rgba(145, 71, 255, 0.15);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            --grid-color: rgba(255, 255, 255, 0.03);
-            --dropdown-bg: #18181b;
-        }
-
-        :root[data-theme="magicsight"] {
-            --bg-base: #e0f2fe;
-            --bg-surface: rgba(255, 255, 255, 0.75);
-            --bg-surface-hover: rgba(255, 255, 255, 0.95);
-            --border-color: rgba(56, 189, 248, 0.4);
-            --border-glow: rgba(56, 189, 248, 0.8);
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --accent: #0284c7;
-            --accent-glow: rgba(56, 189, 248, 0.2);
-            --accent-alt: #f43f5e;
-            --particle-color: rgba(2, 132, 199, 0.4);
-            --wave-color: rgba(56, 189, 248, 0.25);
-            --card-shadow: 0 10px 30px rgba(186, 230, 253, 0.5);
-            --grid-color: rgba(2, 132, 199, 0.04);
-            --dropdown-bg: #ffffff;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: none !important;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-base);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            transition: background-color 0.4s ease, color 0.4s ease;
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        h1, h2, h3, .heading-font {
-            font-family: 'Space Grotesk', sans-serif;
-            letter-spacing: -0.02em;
-        }
-
-        /* ==========================================================================
-           2. BACKGROUND CANVASES, CURSORS & OVERLAYS
-           ========================================================================== */
-        #bg-canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+            background-color: #0b0f0d;
+            color: #00ff66;
+            font-family: 'Courier New', Courier, monospace;
             height: 100vh;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: 
-                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .blob {
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
-            z-index: -1;
-            pointer-events: none;
-            filter: blur(60px);
-            animation: pulse-blob 8s infinite alternate ease-in-out;
-        }
-
-        .blob-1 { top: -100px; left: -100px; }
-        .blob-2 { bottom: -100px; right: -100px; animation-delay: -4s; }
-
-        @keyframes pulse-blob {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
-            100% { transform: scale(1.2) translate(50px, 30px); opacity: 0.8; }
-        }
-
-        #cursor-glow {
-            position: fixed;
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 75%);
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            filter: blur(20px);
-            transition: opacity 0.3s ease;
-        }
-
-        #custom-cursor {
-            position: fixed;
-            width: 22px;
-            height: 22px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 99999;
-            transform: translate(-50%, -50%);
-            transition: width 0.15s ease, height 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
             display: flex;
-            align-items: center;
             justify-content: center;
-            opacity: 0;
+            align-items: center;
         }
 
-        #custom-cursor::after {
-            content: '';
-            width: 4px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            transition: background-color 0.15s ease;
+        /* Subtle CRT scanline overlay */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            z-index: 999;
+            background-size: 100% 4px;
+            pointer-events: none;
         }
 
-        #custom-cursor.hovered {
-            width: 38px;
-            height: 38px;
-            background-color: var(--accent-glow);
-            border-color: var(--accent);
-        }
-
-        /* ==========================================================================
-           3. 404 CONTENT CONTAINER & CARD
-           ========================================================================== */
-        .container {
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
+        .error-card {
+            background: rgba(15, 23, 18, 0.9);
+            border: 1px solid #00ff66;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.15);
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
             text-align: center;
         }
 
-        .glass-card {
-            background: var(--bg-surface);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            box-shadow: var(--card-shadow);
-            padding: 3.5rem 2.5rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, background 0.4s ease;
-        }
-
-        .glass-card:hover {
-            border-color: var(--border-glow);
-            box-shadow: 0 15px 35px var(--accent-glow);
-            transform: translateY(-4px);
-        }
-
         .error-code {
-            font-size: clamp(5rem, 15vw, 8rem);
-            font-weight: 700;
-            line-height: 1;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px var(--accent-glow);
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.4);
         }
 
-        .error-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .error-path {
+            color: #00bb44;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            word-break: break-all;
         }
 
-        .error-description {
-            color: var(--text-secondary);
+        .error-message {
             font-size: 1.05rem;
             line-height: 1.6;
-            margin-bottom: 2.5rem;
+            margin-bottom: 30px;
+            color: #c0ffde;
         }
 
-        .btn-home {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--accent);
-            color: #ffffff;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 1.05rem;
-            padding: 0.9rem 2rem;
-            border-radius: 12px;
+        .home-btn {
+            display: inline-block;
+            background: transparent;
+            color: #00ff66;
+            border: 1px solid #00ff66;
+            padding: 12px 25px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
             text-decoration: none;
-            box-shadow: 0 0 20px var(--accent-glow);
-            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
         }
 
-        .btn-home::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s ease;
+        .home-btn:hover {
+            background: #00ff66;
+            color: #0b0f0d;
+            box-shadow: 0 0 10px #00ff66;
         }
 
-        .btn-home:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 0 30px var(--accent-glow);
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background: #00ff66;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
         }
 
-        .btn-home:hover::before {
-            left: 100%;
-        }
-
-        .btn-home svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        /* ==========================================================================
-           4. TOAST SYSTEM
-           ========================================================================== */
-        #toast-container {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 10000;
-        }
-
-        .toast {
-            background: var(--bg-surface);
-            border: 1px solid var(--accent);
-            color: var(--text-primary);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            backdrop-filter: blur(12px);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            animation: toast-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        @keyframes toast-in {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* ==========================================================================
-           5. COMPACT ICON THEME DROPDOWN COMPONENT
-           ========================================================================== */
-        .custom-dropdown-container {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 9000;
-        }
-
-        .custom-dropdown {
-            position: relative;
-            user-select: none;
-        }
-
-        .custom-dropdown-trigger {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-color);
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            backdrop-filter: blur(12px);
-            box-shadow: var(--card-shadow);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-primary);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-        }
-
-        .custom-dropdown-trigger:hover {
-            border-color: var(--border-glow);
-            box-shadow: 0 5px 20px var(--accent-glow);
-            transform: scale(1.08);
-        }
-
-        .theme-icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            transition: transform 0.3s ease;
-        }
-
-        .custom-dropdown.open .theme-icon {
-            transform: rotate(90deg);
-        }
-
-        .custom-dropdown-menu {
-            position: absolute;
-            bottom: calc(100% + 10px);
-            right: 0;
-            background: var(--dropdown-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 6px;
-            box-shadow: var(--card-shadow);
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            width: 160px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-            backdrop-filter: blur(16px);
-        }
-
-        .custom-dropdown.open .custom-dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .custom-dropdown-option {
-            padding: 0.5rem 0.8rem;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: var(--text-primary);
-            transition: background 0.2s ease, transform 0.15s ease;
-        }
-
-        .custom-dropdown-option:hover {
-            background: var(--accent-glow);
-            transform: translateX(4px);
-        }
-
-        .custom-dropdown-option.selected {
-            color: var(--accent);
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, ::before, ::after {
-                animation: none !important;
-                transition: none !important;
-            }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <div id="custom-cursor"></div>
-    <div id="cursor-glow"></div>
+    <div class="error-card">
+        <div class="error-code">404</div>
+        <div class="error-path">&gt; ricablee.pages.dev<span class="cursor"></span></div>
+        
+        <p class="error-message">
+            Page not found. The link you followed may be broken, or the page may have been removed.
+        </p>
 
-    <div id="bg-canvas-container">
-        <canvas id="wave-canvas"></canvas>
-        <canvas id="particle-canvas"></canvas>
-    </div>
-    <div class="grid-overlay"></div>
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-
-    <div id="toast-container"></div>
-
-    <div class="container">
-        <div class="glass-card interactive-hover">
-            <h1 class="error-code">404</h1>
-            <h2 class="error-title">Page Not Found</h2>
-            <p class="error-description">
-                Looks like this level hasn't been verified or the link is broken. Let's get you back to safe ground.
-            </p>
-            <a href="index.html" class="btn-home interactive-hover">
-                <svg viewBox="0 0 24 24">
-                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                </svg>
-                Return Home
-            </a>
-        </div>
+        <a href="https://ricablee.pages.dev" class="home-btn">&gt; Return Home</a>
     </div>
 
-    <div class="custom-dropdown-container">
-        <div class="custom-dropdown" id="custom-theme-dropdown">
-            <div class="custom-dropdown-trigger interactive-hover" title="Change Theme">
-                <svg class="theme-icon" viewBox="0 0 24 24">
-                    <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.35 20.35c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.74-1.74C9.03 21.26 10.47 22 12 22c4.97 0 9-4.03 9-9s-4.03-9-9-9zm0 16c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/>
-                </svg>
-            </div>
-            <div class="custom-dropdown-menu">
-                <div class="custom-dropdown-option interactive-hover" data-value="polish">
-                    Polish (Dark)
-                </div>
-                <div class="custom-dropdown-option interactive-hover" data-value="magicsight">
-                    MagicSight (Light)
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        /* --------------------------------------------------------------------------
-         * 1. THEME ENGINE WITH LOCALSTORAGE SAVE & RESTORE
-         * -------------------------------------------------------------------------- */
-        const dropdown = document.getElementById('custom-theme-dropdown');
-        const trigger = dropdown.querySelector('.custom-dropdown-trigger');
-        const options = dropdown.querySelectorAll('.custom-dropdown-option');
-        const htmlElement = document.documentElement;
-
-        function applyTheme(themeName) {
-            htmlElement.setAttribute('data-theme', themeName);
-            localStorage.setItem('ricablee_saved_theme', themeName);
-
-            options.forEach(opt => {
-                if (opt.getAttribute('data-value') === themeName) {
-                    opt.classList.add('selected');
-                } else {
-                    opt.classList.remove('selected');
-                }
-            });
-        }
-
-        const savedTheme = localStorage.getItem('ricablee_saved_theme') || 'polish';
-        applyTheme(savedTheme);
-
-        trigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            dropdown.classList.toggle('open');
-        });
-
-        options.forEach(option => {
-            option.addEventListener('click', () => {
-                const selectedVal = option.getAttribute('data-value');
-                applyTheme(selectedVal);
-                dropdown.classList.remove('open');
-            });
-        });
-
-        document.addEventListener('click', () => {
-            dropdown.classList.remove('open');
-        });
-
-        /* --------------------------------------------------------------------------
-         * 2. CUSTOM CIRCLE CURSOR & SUBTLE GLOW FOLLOW
-         * -------------------------------------------------------------------------- */
-        const customCursor = document.getElementById('custom-cursor');
-        const cursorGlow = document.getElementById('cursor-glow');
-        let mouseX = 0, mouseY = 0;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-
-            customCursor.style.opacity = '1';
-            cursorGlow.style.opacity = '1';
-
-            customCursor.style.left = `${mouseX}px`;
-            customCursor.style.top = `${mouseY}px`;
-
-            cursorGlow.style.left = `${mouseX}px`;
-            cursorGlow.style.top = `${mouseY}px`;
-        });
-
-        document.addEventListener('mouseleave', () => {
-            customCursor.style.opacity = '0';
-            cursorGlow.style.opacity = '0';
-        });
-
-        const interactiveElements = document.querySelectorAll('a, button, .interactive-hover, .glass-card');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => customCursor.classList.add('hovered'));
-            el.addEventListener('mouseleave', () => customCursor.classList.remove('hovered'));
-        });
-
-        /* --------------------------------------------------------------------------
-         * 3. BACKGROUND CANVASES (Particles & Wave Animation)
-         * -------------------------------------------------------------------------- */
-        const pCanvas = document.getElementById('particle-canvas');
-        const pCtx = pCanvas.getContext('2d');
-        const wCanvas = document.getElementById('wave-canvas');
-        const wCtx = wCanvas.getContext('2d');
-
-        let width, height;
-
-        function resizeCanvases() {
-            width = pCanvas.width = wCanvas.width = window.innerWidth;
-            height = pCanvas.height = wCanvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvases);
-        resizeCanvases();
-
-        const particles = [];
-        const particleCount = 45;
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 3 + 1;
-                this.alpha = Math.random() * 0.5 + 0.2;
-            }
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                const dx = mouseX - this.x;
-                const dy = mouseY - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 100) {
-                    this.x -= (dx / dist) * 0.8;
-                    this.y -= (dy / dist) * 0.8;
-                }
-
-                if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
-                    this.reset();
-                }
-            }
-            draw() {
-                const color = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim();
-                pCtx.fillStyle = color;
-                pCtx.globalAlpha = this.alpha;
-                pCtx.beginPath();
-                pCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                pCtx.fill();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        let step = 0;
-
-        function animateBackgrounds() {
-            pCtx.clearRect(0, 0, width, height);
-            wCtx.clearRect(0, 0, width, height);
-
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            step += 0.015;
-            const waveColor = getComputedStyle(document.documentElement).getPropertyValue('--wave-color').trim();
-            wCtx.fillStyle = waveColor;
-            wCtx.beginPath();
-            wCtx.moveTo(0, height);
-            for (let x = 0; x <= width; x += 20) {
-                const y = Math.sin(x * 0.003 + step) * 40 + Math.cos(x * 0.001 + step) * 20 + (height * 0.85);
-                wCtx.lineTo(x, y);
-            }
-            wCtx.lineTo(width, height);
-            wCtx.closePath();
-            wCtx.fill();
-
-            requestAnimationFrame(animateBackgrounds);
-        }
-        animateBackgrounds();
-
-        /* --------------------------------------------------------------------------
-         * 4. TOAST HELPER
-         * -------------------------------------------------------------------------- */
-        function showToast(message) {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.textContent = message;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-    </script>
 </body>
 </html>
